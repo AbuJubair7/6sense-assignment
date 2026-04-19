@@ -5,7 +5,7 @@ erDiagram
 	CATEGORY ||--o{ PRODUCT : contains
 
 	CATEGORY {
-		ObjectId _id PK
+		ObjectId _id
 		string name
 		string description
 		date createdAt
@@ -13,15 +13,15 @@ erDiagram
 	}
 
 	PRODUCT {
-		ObjectId _id PK
+		ObjectId _id
 		string name
 		string description
 		number price
 		number discount
 		string image
 		string status
-		string productCode UNIQUE
-		ObjectId categoryId FK
+		string productCode
+		ObjectId categoryId
 		date createdAt
 		date updatedAt
 	}

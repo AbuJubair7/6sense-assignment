@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:integration": "node -r ts-node/register src/tests/integration.test.ts",
     "build": "tsc",
     "dev": "nodemon --watch src --ext ts --exec \"npm run start:compiled\"",
     "start:compiled": "npm run build && node dist/app.js"
@@ -15,12 +15,21 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^25.6.0",
+    "@types/uuid": "^10.0.0",
     "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1",
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^14.0.0"
   }
 }

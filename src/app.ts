@@ -2,11 +2,15 @@ import { routes, controllers } from "./main";
 import express from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
+import { connectDB } from "./config/db";
 dotenv.config();
 
 const server = express();
 
-const inititalizeApp = () => {
+const inititalizeApp = async () => {
+  // connect to MongoDB first — fail fast if unavailable
+  await connectDB();
+
   // middlewares
   server.use(cors());
   server.use(express.json());
@@ -30,4 +34,7 @@ const inititalizeApp = () => {
   });
 };
 
-inititalizeApp();
+inititalizeApp().catch((err) => {
+  console.error("Failed to start server:", err);
+  process.exit(1);
+});

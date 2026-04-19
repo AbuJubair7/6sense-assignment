@@ -40,9 +40,12 @@ const main_1 = require("./main");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
+const db_1 = require("./config/db");
 dotenv.config();
 const server = (0, express_1.default)();
-const inititalizeApp = () => {
+const inititalizeApp = async () => {
+    // connect to MongoDB first — fail fast if unavailable
+    await (0, db_1.connectDB)();
     // middlewares
     server.use((0, cors_1.default)());
     server.use(express_1.default.json());
@@ -61,5 +64,8 @@ const inititalizeApp = () => {
         console.log(`Server is running on http://${HOST}:${PORT}`);
     });
 };
-inititalizeApp();
+inititalizeApp().catch((err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+});
 //# sourceMappingURL=app.js.map

@@ -1,12 +1,33 @@
+import { routes, controllers } from "./main";
 import express from "express";
+import cors from "cors";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const app = express();
+const server = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello, 6sense!");
-});
+const inititalizeApp = () => {
+  // middlewares
+  server.use(cors());
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  // activate routes
+  Object.entries(routes).forEach(([route, router]) => {
+    server.use(route, router);
+  });
+
+  // activate controllers
+  Object.values(controllers).forEach((controller) => {
+    controller.activateRoutes();
+  });
+
+  const PORT = Number(process.env.PORT) || 3000;
+  const HOST = process.env.HOST || "0.0.0.0";
+
+  server.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
+  });
+};
+
+inititalizeApp();

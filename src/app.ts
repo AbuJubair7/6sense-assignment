@@ -25,7 +25,7 @@ const inititalizeApp = async () => {
   Object.values(controllers).forEach((controller) => {
     controller.activateRoutes();
   });
-
+// random comment
   const PORT = Number(process.env.PORT) || 3000;
   const HOST = process.env.HOST || "0.0.0.0";
 

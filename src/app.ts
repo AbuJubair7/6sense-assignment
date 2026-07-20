@@ -6,7 +6,7 @@ import { connectDB } from "./config/db";
 dotenv.config();
 
 const server = express();
-
+//testing Comment
 const inititalizeApp = async () => {
   // connect to MongoDB first — fail fast if unavailable
   await connectDB();
